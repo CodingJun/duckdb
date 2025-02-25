@@ -22,6 +22,7 @@
 #include "parquet_types.h"
 #include "resizable_buffer.hpp"
 #include "duckdb/execution/adaptive_filter.hpp"
+#include "duckdb/planner/filter/in_filter.hpp"
 
 #include <exception>
 

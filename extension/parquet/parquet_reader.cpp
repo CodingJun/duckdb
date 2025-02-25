@@ -851,6 +851,14 @@ static FilterPropagateResult CheckParquetStringFilter(BaseStatistics &stats, con
 		return StringStats::CheckZonemap(const_data_ptr_cast(min_value.c_str()), min_value.size(),
 		                                 const_data_ptr_cast(max_value.c_str()), max_value.size(),
 		                                 constant_filter.comparison_type, StringValue::Get(constant_filter.constant));
+	} if (filter.filter_type == TableFilterType::IN_FILTER) {
+		auto &in_filter = filter.Cast<InFilter>();
+		auto &min_value = pq_col_stats.min_value;
+		auto &max_value = pq_col_stats.max_value;
+		auto &values = in_filter.values;
+		return StringStats::CheckZonemap(const_data_ptr_cast(min_value.c_str()), min_value.size(),
+		                          const_data_ptr_cast(max_value.c_str()), max_value.size(),
+		                          ExpressionType::COMPARE_EQUAL, array_ptr<Value>(values.data(), values.size()));
 	} else {
 		return filter.CheckStatistics(stats);
 	}
