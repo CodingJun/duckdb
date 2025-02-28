@@ -208,7 +208,8 @@ FilterPropagateResult StringStats::CheckZonemap(const BaseStatistics &stats, Exp
 }
 
 FilterPropagateResult StringStats::CheckZonemap(const_data_ptr_t min_data, idx_t min_len, const_data_ptr_t max_data,
-                                                idx_t max_len,  ExpressionType comparison_type, array_ptr<Value> constants) {
+                                                idx_t max_len,  ExpressionType comparison_type,
+                                                array_ptr<Value> constants) {
 	for (auto &constant_value : constants) {
 		D_ASSERT(!constant_value.IsNull());
 		auto &constant = StringValue::Get(constant_value);
